@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management System</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+</head>
+
+<body>
+
+<!-- ✅ Navbar -->
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Student Management System</a>
+
+    <!-- Toggler/collapsible Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/Students}">Student Management</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+
+<!-- ✅ Container for student list -->
+<div class="container">
+    <h2 class="mt-4">Student Management System</h2>
+
+    <div class="row mb-3">
+        <div class="col-lg-3">
+            <a class="btn btn-primary" th:href="@{/students/new}">Add Students</a>
+
+        </div>
+    </div>
+
+    <h2 class="text-center mb-4">Student List</h2>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>S.No</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email ID</th>
+            <th>Mobile</th>
+            <th>Action</th>
+            <th> Delete Action</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="student , iterStat : ${students}">
+            <td th:text="${iterStat.index + 1}">1</td>
+            <td th:text="${student.firstname}">First Name</td>
+            <td th:text="${student.lastname}">Last Name</td>
+            <td th:text="${student.emailId}">Email</td>
+            <td th:text="${student.mobile}">Mobile</td>
+            <td > <a th:href ="@{/students/edit/{id} (id= ${student.id})}" class= "btn btn-primary">Update</a></td>
+
+            <td>
+                <a th:href="@{/students/{id}(id=${student.id})}" class="btn btn-danger">Delete</a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- ✅ Bootstrap JS for toggler to work -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
